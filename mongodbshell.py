@@ -2,22 +2,21 @@ import pymongo
 from pymongo import MongoClient
 import colorama
 from colorama import Fore, Back, Style
-import datetime
 
 colorama.init()
 
 print(Fore.MAGENTA + "The following is a console application to manage your mongodb database")
 session_name = input(Fore.WHITE + "What is the name of your session: ")
 
-with open("log.txt", "w") as f:
-    f.writelines(session_name + ":" + " " + str(datetime.datetime.now()))
+
 
 action = input("What do you want to do? delete, add, view:")
 
 
 
 def insert():
-    cluster = MongoClient('mongodb+srv://admin:password12345@cluster0.gsfkl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    api_key = input("Please insert your MongoDB API Token: ")
+    cluster = MongoClient(api_key)
     cluster_name = input("What is the cluster name?: ")
     coll_name = input("What is the following collection name?: ")
     db = cluster[cluster_name]
@@ -37,8 +36,8 @@ def insert():
             insert()
 
 def delete():
-    cluster = MongoClient('mongodb+srv://admin:password12345@cluster0.gsfkl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-    cluster_name = input("What is the cluster name?: ")
+    api_key = input("Please insert your MongoDB API Token: ")
+    cluster = MongoClient(api_key)
     coll_name = input("What is the following collection name?: ")
     db = cluster[cluster_name]
     collection = db[coll_name]
@@ -57,8 +56,8 @@ def delete():
             delete()
 
 def view():
-    cluster = MongoClient('mongodb+srv://admin:password12345@cluster0.gsfkl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-    cluster_name = input("What is the cluster name?: ")
+    api_key = input("Please insert your MongoDB API Token: ")
+    cluster = MongoClient(api_key)
     coll_name = input("What is the following collection name?: ")
     db = cluster[cluster_name]
     collection = db[coll_name]
